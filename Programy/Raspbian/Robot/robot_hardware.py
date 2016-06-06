@@ -9,7 +9,7 @@ BIN1 = 22
 BIN2 = 23
 
 class Robot:
-    def init(self):
+    def __init__(self):
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(AIN1, GPIO.OUT)
         GPIO.setup(AIN2, GPIO.OUT) 

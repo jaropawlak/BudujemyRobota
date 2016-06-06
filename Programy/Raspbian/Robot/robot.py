@@ -4,7 +4,8 @@ import socket
 
 
 class Robot:
-    def init(self):
+    def __init__(self):
+        print('initialize')
         return
 
     def goForward(self):
