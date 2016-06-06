@@ -1,0 +1,22 @@
+<html>
+<head><title> Panel sterowania robotem </title>
+
+<script type='text/javascript'>
+    function action(p) 
+    {
+        document.location=p;
+    }
+</script>
+    
+
+</head>
+<body>
+    <table>
+    <tbody>
+        <tr>      <td></td>    <td> <button onclick="action('F')">PRZOD</button> </td>    <td></td>    </tr>
+        <tr>      <td><button onclick="action('L')"> LEWO</button></td>    <td><button onclick="action('S')">STOP</button></td>    <td><button onclick="action('R')">PRAWO</button></td>    </tr>
+        <tr>      <td></td>    <td><button onclick="action('B')">TYL</button></td>    <td></td>    </tr> 
+    </tbody>
+    </table>
+</body>
+</html>
