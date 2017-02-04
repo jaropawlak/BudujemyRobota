@@ -29,5 +29,8 @@ class Robot:
         print('stop')
         return
 
+    def move(self, speed, direction):
+        print('going with', speed, 'speed and direction: ', direction)
+        return 
     def makePhoto(self):
         return

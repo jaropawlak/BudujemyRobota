@@ -1,4 +1,4 @@
-from flask import Flask, render_template #web server
+from flask import Flask, render_template, request #web server
 from robot import Robot
 app = Flask(__name__)
 
@@ -34,6 +34,13 @@ def Stop():
     r.stop()
     return render_template('index.html')
     
+@app.route('/M')
+def Move():
+    speed= request.args.get('speed')
+    direction=request.args.get('direction')
+    r.move(speed,direction)
+    return 'ok'
+
     
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', port = 3000)

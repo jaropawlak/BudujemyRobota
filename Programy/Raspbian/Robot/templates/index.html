@@ -9,6 +9,26 @@
     
 </style>
 <script type='text/javascript'>
+ var speed=0, direction = 0;
+ var intervalId = window.setInterval(function() {
+   var r = new XMLHttpRequest();
+   r.open("GET", "/M?speed="+speed+"&direction="+direction, true);
+   r.send();
+
+ } , 200);
+
+ function stop() {
+    window.clearInterval(intervalId);
+ }
+
+ window.addEventListener("deviceorientation", function(event) {
+        document.getElementById("alpha").innerText = event.alpha;
+        document.getElementById("beta").innerText = event.beta;
+        document.getElementById("gamma").innerText = event.gamma;
+          // process event.alpha, event.beta and event.gamma
+speed = event.gamma;
+direction = event.beta;
+      }, true);
     function action(p) 
     {
         document.location=p;
@@ -18,6 +38,8 @@
 
 </head>
 <body>
+beta : na boki, gamma : przyspieszanie/zwalnianie
+ alpha: <span id="alpha"></span>, beta: <span id="beta"></span>, gamma: <span id="gamma"></span>
     <table width="100%" height="100%">
     <tbody>
         <tr>      <td></td>    <td width="33%" height="33%"> <div><button onclick="action('F')">PRZOD</button></div> </td>    <td></td>    </tr>
