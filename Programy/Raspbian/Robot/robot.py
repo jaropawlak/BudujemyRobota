@@ -30,6 +30,12 @@ class Robot:
         return
 
     def move(self, speed, direction):
+        speed = speed * 4
+        speed = 100 if speed > 100.0 else speed
+        speed = -100 if speed < -100.0 else speed
+        direction = direction * 4
+        direction = 100 if direction > 100.0 else direction
+        direction = -100 if direction < -100.0 else direction
         print('going with', speed, 'speed and direction: ', direction)
         return 
     def makePhoto(self):
