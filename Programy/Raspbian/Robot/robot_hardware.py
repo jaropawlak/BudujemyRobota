@@ -20,6 +20,13 @@ class Robot:
         self.motorLeftBack = GPIO.PWM(AIN2, Frequency)
         self.motorRightForward = GPIO.PWM(BIN2, Frequency)
         self.motorRightBack = GPIO.PWM(BIN1, Frequency)
+        self.motorLeftForward.start(0)
+        self.motorLeftBack.start(0)
+        self.motorRightForward.start(0)
+        self.motorRightBack.start(0)
+
+    def __del__(self):
+        GPIO.cleanup()
 
 
     def goForward(self):
@@ -61,36 +68,44 @@ class Robot:
         (GPIO.output(BIN2, GPIO.LOW))
         return
     def move(self, speed, direction):
-        speed = round(speed) * 4
-        speed = 100 if speed > 100 else speed
-        speed = -100 if speed < -100 else speed
-        direction = round(direction) * 4
-        direction = 100 if direction > 100 else direction
-        direction = -100 if direction < -100 else direction
-        print('going with', speed, 'speed and direction: ', direction)
+        print('move started1')
+        print('1')
+        s = int(speed) * 4
+        s = 100 if s > 100 else s
+        s = -100 if s < -100 else s
+        d = int(direction) * 4
+        d = 100 if d > 100 else d
+        d= -100 if d < -100 else d
+#        print('going with', s, 'speed and direction: ', d)
+        print('2')
+        leftEngineSpeed = (s - d) 
+        rightEngineSpeed = (s + d)
 
-        leftEngineSpeed = (speed + direction) /2
-        rightEngineSpeed = (speed - direction) /2
+        leftEngineSpeed = 100 if leftEngineSpeed > 100 else leftEngineSpeed
+        leftEngineSpeed = -100 if leftEngineSpeed < -100 else leftEngineSpeed
+
+        rightEngineSpeed = 100 if rightEngineSpeed > 100 else rightEngineSpeed
+        rightEngineSpeed = -100 if rightEngineSpeed < -100 else rightEngineSpeed
 
         if leftEngineSpeed > 0 :
-            self.motorLeftBack.stop()
-            self.motorLeftForward.start(leftEngineSpeed)
-        else if leftEngineSpeed < 0:
-            self.motorLeftForward.stop()
-            self.motorLeftBack.start(leftEngineSpeed)
+            self.motorLeftBack.ChangeDutyCycle(0)
+            self.motorLeftForward.ChangeDutyCycle(leftEngineSpeed)
+        elif leftEngineSpeed < 0:
+            self.motorLeftForward.ChangeDutyCycle(0)
+            self.motorLeftBack.ChangeDutyCycle(-leftEngineSpeed)
         else:
-            self.motorLeftForward.stop()
-            self.motorLeftBack.stop()
+            self.motorLeftForward.ChangeDutyCycle(0)
+            self.motorLeftBack.ChangeDutyCycle(0)
 
         if rightEngineSpeed > 0 :
-            self.motorRightBack.stop()
-            self.motorRightForward.start(rightEngineSpeed)
-        else if rightEngineSpeed <0:
-            self.motorRightForward.stop()
-            self.motorRightBack.start(rightEngineSpeed)
+            self.motorRightBack.ChangeDutyCycle(0)
+            self.motorRightForward.ChangeDutyCycle(rightEngineSpeed)
+        elif rightEngineSpeed <0:
+            self.motorRightForward.ChangeDutyCycle(0)
+            self.motorRightBack.ChangeDutyCycle(-rightEngineSpeed)
         else:
-            self.motorRightForward.stop()
-            self.motorRightBack.stop()
+            self.motorRightForward.ChangeDutyCycle(0)
+            self.motorRightBack.ChangeDutyCycle(0)
 
         
         return "ok"
