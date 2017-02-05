@@ -12,7 +12,7 @@
  var speed=0, direction = 0;
  var intervalId = window.setInterval(function() {
    var r = new XMLHttpRequest();
-   r.open("GET", "/M?speed="+speed+"&direction="+direction, true);
+   r.open("GET", "/M?speed="+parseInt(speed)+"&direction="+parseInt(direction), true);
    r.send();
 
  } , 200);
