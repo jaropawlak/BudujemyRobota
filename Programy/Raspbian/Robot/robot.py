@@ -78,8 +78,8 @@ class Robot:
         d= -100 if d < -100 else d
 #        print('going with', s, 'speed and direction: ', d)
         print('2')
-        leftEngineSpeed = (s + d) 
-        rightEngineSpeed = (s - d)
+        leftEngineSpeed =  (s + d* s/100 ) 
+        rightEngineSpeed = (s - d* s/100 )
 
         leftEngineSpeed = 100 if leftEngineSpeed > 100 else leftEngineSpeed
         leftEngineSpeed = -100 if leftEngineSpeed < -100 else leftEngineSpeed
